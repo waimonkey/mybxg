@@ -4,10 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>学IT - 后台管理系统</title>
-    <link rel="stylesheet" href="/public/assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/public/assets/font-awesome/css/font-awesome.css">
-    <link rel="stylesheet" href="/public/assets/nprogress/nprogress.css">
-    <link rel="stylesheet" href="/public/less/index.css">
+    <?php include('/view/common/style.html') ?>
 </head>
 
 <body>
@@ -34,41 +31,38 @@
             </form>
         </div>
     </div>
-    <script src="/public/assets/jquery/jquery.min.js"></script>
-    <script src="/public/assets/jquery-cookie/jquery.cookie.js"></script>
-    <script src="/public/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-    //获取表单 监听提交事件
-    $('#loginForm').submit(function() {
-        //获取表单全部内容
-        var formData = $(this).serialize();
-        //使用ajax方式提交数据
-        $.ajax({
-            type: 'post',
-            // url : 'http://api.studyit.com/login'
-            url: '/api/login',
-            data: formData,
-            dataType: 'json',
-            success: function(data) {
-                console.log(data);
-                if (data.code == 200) {
-                    console.log(data.result);
-                    var logInfo = JSON.stringify(data.result);
-                    // 实现cookie数据的跨页面共享
-                    $.cookie('logInfo', logInfo, {
-                        path: '/'
-                    });
-                    location.href = '/index/index';
-               }
-            },
-            error: function(data) {
-                console.log(data.responseText);
-            }
+    <?php include('/view/common/script.html')?>
+        <script type="text/javascript">
+        //获取表单 监听提交事件
+        $('#loginForm').submit(function() {
+            //获取表单全部内容
+            var formData = $(this).serialize();
+            //使用ajax方式提交数据
+            $.ajax({
+                type: 'post',
+                url: '/api/login',
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    if (data.code == 200) {
+                        console.log(data.result);
+                        var logInfo = JSON.stringify(data.result);
+                        // 实现cookie数据的跨页面共享
+                        $.cookie('logInfo', logInfo, {
+                            path: '/'
+                        });
+                        location.href = '/index/index';
+                    }
+                },
+                error: function(data) {
+                    console.log(data.responseText);
+                }
+            });
+            //阻止默认行为
+            return false;
         });
-        //阻止默认行为
-        return false;
-    });
-    </script>
+        </script>
 </body>
 
 </html>

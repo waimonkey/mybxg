@@ -21,6 +21,8 @@
          if (count($arr) == 2){
             $path = $arr[0];
             $filename = $arr[1];
+         }else{
+            $filename = 'login';
          }
         }else{
             //不是的话 表示登录也
