@@ -47,7 +47,22 @@ define(['jquery', 'echarts', 'cookie'], function($,echarts) {
         return false;
     });
 
-    
+    //退出功能
+    //获取退出按钮 注册点击事件
+       // 退出功能
+    $('#logoutId').click(function(){
+        $.ajax({
+            type : 'post',
+            url : '/api/logout',
+            dataType : 'json',
+            success : function(data){
+                if(data.code == 200){
+                    location.href = '/login';
+                }
+            }
+        });
+    });
+
     //渲染功能
     //设置头像和用户名
     //变为json格式
