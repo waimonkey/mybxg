@@ -1,7 +1,10 @@
 /*
 讲师
 */
-define(['jquery', 'template', 'bootstrap'], function($, template) {
+define(['jquery', 'template','util', 'bootstrap','overlay'], function($, template,util) {
+
+    //设置侧边栏的active样式
+    util.setMenu(location.pathname);
 
 //显示加载列表
 $.ajax({

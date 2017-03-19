@@ -1,6 +1,7 @@
 
-define(['echarts'],function(echarts){
-    //echarts
+define(['echarts','jquery','util'],function(echarts,$,util){
+    //设置侧边栏的点击样式active
+     util.setMenu(location.pathname);
 
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
