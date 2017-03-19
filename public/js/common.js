@@ -1,4 +1,4 @@
-define(['jquery', 'echarts', 'cookie'], function($,echarts) {
+define(['jquery', 'echarts', 'template','cookie'], function($,echarts,template) {
 
 
     //控制左侧导航菜单的显示和隐藏
@@ -67,7 +67,17 @@ define(['jquery', 'echarts', 'cookie'], function($,echarts) {
     //设置头像和用户名
     //变为json格式
     var obj = JSON.parse($.cookie('logInfo'));
-    $('.aside .profile img').attr('src', obj.tc_avatar);
-    $('.aside .profile h4').html(obj.tc_name);
+    // $('.aside .profile img').attr('src', obj.tc_avatar);
+    // $('.aside .profile h4').html(obj.tc_name);
+
+
+    var str = ' <div class="avatar img-circle">'+
+                '<img src="{{tc_avatar}}">'+
+            '</div>'+
+            '<h4>{{tc_name}}</h4>';
+        
+    var render = template.compile(str);
+    var html = render(obj);
+    $('.aside .profile').html(html);
 
 })
